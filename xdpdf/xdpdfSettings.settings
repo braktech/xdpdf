@@ -1,0 +1,33 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="xdpdf" GeneratedClassName="xdpdfSettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Logging" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="LogPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\agent_tests\pdf detect</Value>
+    </Setting>
+    <Setting Name="QuarantinePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\agent_tests\pdf detect\HAZDAT raw pdfs</Value>
+    </Setting>
+    <Setting Name="Keywords" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;/JS&lt;/string&gt;
+  &lt;string&gt;/JavaScript&lt;/string&gt;
+  &lt;string&gt;/AA&lt;/string&gt;
+  &lt;string&gt;/OpenAction&lt;/string&gt;
+  &lt;string&gt;/JBIG2Decode&lt;/string&gt;
+  &lt;string&gt;/RichMedia&lt;/string&gt;
+  &lt;string&gt;/Launch&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="ScanAllAttachments" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="LogLevel" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
