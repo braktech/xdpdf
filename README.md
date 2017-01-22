@@ -1,12 +1,13 @@
-Exchange Defend: PDF (xdpdf) is designed to quickly and transparently render inert potentially malicious parts of a PDF document traversing a Microsoft Exchange server. Whenever it changes a PDF document, it will advise the recipient of the email and keep a copy for administrative review if necessary.
+**Exchange Defend: PDF** (xdpdf) is designed to quickly and transparently render inert potentially malicious parts of a PDF document traversing a Microsoft Exchange server. Whenever it changes a PDF document, it will advise the recipient of the email and keep a copy for administrative review if necessary.
 
 xdpdf works in the following way:
-1.	It detects a PDF
-2.	It scans the PDF for potentially undesirable keywords
-3.	If a keyword is matched, xdpdf will:
-	a)	copy the PDF to an administrator-specified location
-	b)	overwrite the first two bytes of the keyword, preventing execution by the PDF reader
-	c)	notify the user, instructing them to contact their mail administrator if they require the original document
+
+1. It detects a PDF
+2. It scans the PDF for potentially undesirable keywords
+3. If a keyword is matched, xdpdf will:
+  1. copy the PDF to an administrator-specified location
+  2. overwrite the first two bytes of the keyword, preventing execution by the PDF reader
+  3. notify the user, instructing them to contact their mail administrator if they require the original document
 
 xdpdf is highly configurable.  It has multiple log levels, as well as allowing administrative configuration of log and quarantine directories.  In addition, the administrator can specify if xdpdf should believe the attachment extension or MIME-type supplied by Exchange, or perform speedy PDF detection on all incoming attachments.
 
@@ -19,42 +20,48 @@ Note: xdpdf will work on Exchange Server 2010 without SP1 or Exchange Server 200
 
 Installation
 ============
-1)	Copy xdpdf.dll and xdpdf.config to a directory on the mail server
-2)	Set configuration options, creating the LogPath and QuarantinePath directories
-3)	In the Exchange Management Shell on the Exchange server, run 'Install-TransportAgent -Name xdpdf -AssemblyPath drive:\path\to\dll\xdpdf.dll> -TransportAgentFactory xdpdf.xdpdfFactory'
-4)	In the Exchange Management Shell on the Exchange server, run 'Enable-TransportAgent -Identity xdpdf'
-5)	In the Exchange Management Shell on the Exchange server, run 'Restart-Service MSExchangeTransport'
-6)	Monitor LogPath for log files, and QuarantinePath for quarantined files
+
+1. Copy xdpdf.dll and xdpdf.config to a directory on the mail server
+2. Set configuration options, creating the LogPath and QuarantinePath directories
+3. In the Exchange Management Shell on the Exchange server, run 'Install-TransportAgent -Name xdpdf -AssemblyPath drive:\path\to\dll\xdpdf.dll> -TransportAgentFactory xdpdf.xdpdfFactory'
+4. In the Exchange Management Shell on the Exchange server, run 'Enable-TransportAgent -Identity xdpdf'
+5. In the Exchange Management Shell on the Exchange server, run 'Restart-Service MSExchangeTransport'
+6. Monitor LogPath for log files, and QuarantinePath for quarantined files
 
 Configuration Change
 ====================
-1)	In the Exchange Management Shell on the Exchange server, run 'Disable-TransportAgent -Identity xdpdf'
-2)	In the Exchange Management Shell on the Exchange server, run 'Restart-Service MSExchangeTransport'
-3)	Make changes to the configuration file
-4)	In the Exchange Management Shell on the Exchange server, run 'Enable-TransportAgent -Identity xdpdf'
-5)	In the Exchange Management Shell on the Exchange server, run 'Restart-Service MSExchangeTransport'
+
+1. In the Exchange Management Shell on the Exchange server, run 'Disable-TransportAgent -Identity xdpdf'
+2. In the Exchange Management Shell on the Exchange server, run 'Restart-Service MSExchangeTransport'
+3. Make changes to the configuration file
+4. In the Exchange Management Shell on the Exchange server, run 'Enable-TransportAgent -Identity xdpdf'
+5. In the Exchange Management Shell on the Exchange server, run 'Restart-Service MSExchangeTransport'
 
 Uninstallation
 ==============
-1)	In the Exchange Management Shell on the Exchange server, run 'Disable-TransportAgent -Identity xdpdf'
-2)	In the Exchange Management Shell on the Exchange server, run 'Uninstall-TransportAgent -Identity xdpdf'
-3)	In the Exchange Management Shell on the Exchange server, run 'Restart-Service MSExchangeTransport'
-4)	Delete xdpdf files as desired
+
+1. In the Exchange Management Shell on the Exchange server, run 'Disable-TransportAgent -Identity xdpdf'
+2. In the Exchange Management Shell on the Exchange server, run 'Uninstall-TransportAgent -Identity xdpdf'
+3. In the Exchange Management Shell on the Exchange server, run 'Restart-Service MSExchangeTransport'
+4. Delete xdpdf files as desired
 
 Configuration
 =============
 The configuration file contains the following settings:
-Logging [True|False]		: Enable or disable logging globally
-Loglevel [0 - 2]		: Specify the log level:
-				: 0) Log only malicious PDFs
-				: 1) Log start, end and PDF processing details for each email
-				: 2) Verbose; detailed logging (recommended for testing purposes only)
-LogPath [drive:\path]		: Path to the log directory.  It should already exist.
-				: xdpdf will create one log file per day within this directory
-QuarantinePath [drive:\path]	: Path to the quarantine directory.  It should already exist.
-				: xdpdf will create one subdirectory per email containing a potentially malicious PDF, and place the unmodified PDF within.
-Keywords [string list]		: Keywords should be of the form '/Keyword', noting the leading slash and case correctness according to the PDF spec
-ScanAllAttachments [True|False]	: If True, xdpdf will use its internal PDF file magic. If False, it will believe the file extension or MIME type supplied by Exchange.
+
+Parameter | Options | Description
+--- | --- | ---
+Logging | True/False		| Enable or disable logging globally
+Loglevel | 0 - 2		| Specify the log level:
+	|			| 0) Log only malicious PDFs
+	|			| 1) Log start, end and PDF processing details for each email
+	|			| 2) Verbose; detailed logging (recommended for testing purposes only)
+LogPath | drive:\path		| Path to the log directory.  It should already exist.
+	|			| xdpdf will create one log file per day within this directory
+QuarantinePath | drive:\path	| Path to the quarantine directory.  It should already exist.
+	|			| xdpdf will create one subdirectory per email containing a potentially malicious PDF, and place the unmodified PDF within.
+Keywords | string list		| Keywords should be of the form '/Keyword', noting the leading slash and case correctness according to the PDF spec
+ScanAllAttachments | True/False	| If True, xdpdf will use its internal PDF file magic. If False, it will believe the file extension or MIME type supplied by Exchange.
 
 Implementation Notes
 ====================
